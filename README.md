@@ -79,7 +79,7 @@ and the different risks scores.
 If you found this work useful for you, please consider citing it.
 ```
 @inproceedings{mpau,
-  author = {Ragab, Mohamed and Eldele, Emadeldeen and Tan, and Foo, Chuan-Sheng and  and Wu, Min and Li, Xiaoli and Chen, Zhenghua},
+  author = {Ragab, Mohamed and Eldele, Emadeldeen and Foo, Chuan-Sheng and Wu, Min and Li, Xiaoli and Chen, Zhenghua},
   title = {Source-Free Domain Adaptation with Temporal Imputation for Time Series Data},
   booktitle={29th SIGKDD Conference on Knowledge Discovery and Data Mining - Research Track},
   year = {2023},
