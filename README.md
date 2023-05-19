@@ -1,3 +1,8 @@
+# [KDD 2023] MAPU: Source-Free Domain Adaptation with Temporal Imputation for Time Series Data [[Paper]()] [[Cite](#citation)]
+#### *by: Mohamed Ragab, Emadeldeen Eldele,   Min Wu, Chuan-Sheng Foo, Xiaoli Li, Zhenghua Chen* <br/> 
+
+## Published in the [ACM Transactions on Knowledge Discovery from Data (TKDD)](https://dl.acm.org/doi/10.1145/3587937).
+
 # Source-Free Domain Adaptation with Temporal Imputation for Time Series Data
 
 <p align="center">
