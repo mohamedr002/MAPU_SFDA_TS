@@ -1,7 +1,7 @@
 # Source-Free Domain Adaptation with Temporal Imputation for Time Series Data
 
 <p align="center">
-<img src="temporal_adapt.PNG" width="900" class="center">
+<img src="misc/temporal_adapt.pdf" width="900" class="center">
 </p>
 
 ## Requirmenets:
@@ -37,27 +37,25 @@ The experiments are organised in a hierarchical way such that:
 To train a model:
 
 ```
-python main.py  --experiment_description exp1  \
+python trainers/train.py  --experiment_description exp1  \
                 --run_description run_1 \
                 --da_method MAPU \
                 --dataset HAR \
                 --backbone CNN \
                 --num_runs 3 \
-                --sweep False
 ```
 ### Launching a sweep
 Sweeps here are deployed on [Wandb](https://wandb.ai/), which makes it easier for visualization, following the training progress, organizing sweeps, and collecting results.
 
 ```
-python main.py  --experiment_description exp1_sweep  \
+python trainers/sweep.py  --experiment_description exp1_sweep  \
                 --run_description sweep_over_lr \
-                --da_method MAOU \
+                --da_method MAPU \
                 --dataset HAR \
                 --backbone CNN \
                 --num_runs 3\
-                --is_sweep True \
                 --num_sweeps 50 \
-                --sweep_project_wandb TEST
+                --sweep_project_wandb MAPU_HAR
 ```
 Upon the run, you will find the running progress in the specified project page in wandb.
 
