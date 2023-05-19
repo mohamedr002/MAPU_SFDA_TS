@@ -1,0 +1,11 @@
+wandb/
+experiments_logs/
+main/
+baselines_sfda/
+main_full.py
+*.xml
+*.iml
+main_full.py
+main_full.py
+main_full.py
+main_full.py
