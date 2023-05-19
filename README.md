@@ -1,7 +1,7 @@
-# [KDD 2023] MAPU: Source-Free Domain Adaptation with Temporal Imputation for Time Series Data [[Paper]()] [[Cite](#citation)]
+# [KDD 2023] Source-Free Domain Adaptation with Temporal Imputation for Time Series Data [[Paper]()] [[Cite](#citation)]
 #### *by: Mohamed Ragab, Emadeldeen Eldele,   Min Wu, Chuan-Sheng Foo, Xiaoli Li, Zhenghua Chen* <br/> 
 
-## Accepted in the [ACM Conference on Knowledge Discovery from Data (KDD)]().
+## Accepted in the [ACM Conference on Knowledge Discovery from Data (KDD)](https://kdd.org/kdd2023/).
 
 
 <p align="center">
@@ -73,5 +73,18 @@ is the run_id (you can have multiple runs by assigning `--num_runs` arg).
 and the different risks scores.
 - By the end of the all the runs, you will find the overall average and std results in the run directory.
 
+
+
+## Citation
+If you found this work useful for you, please consider citing it.
+```
+@inproceedings{mpau,
+  author = {Ragab, Mohamed and Eldele, Emadeldeen and Tan, and Foo, Chuan-Sheng and  and Wu, Min and Li, Xiaoli and Chen, Zhenghua},
+  title = {Source-Free Domain Adaptation with Temporal Imputation for Time Series Data},
+  booktitle={29th SIGKDD Conference on Knowledge Discovery and Data Mining - Research Track},
+  year = {2023},
+  url={https://openreview.net/forum?id=v6GK0ijPW0B}
+}
+```
 
 
