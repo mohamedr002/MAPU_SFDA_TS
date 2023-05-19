@@ -1,7 +1,7 @@
 # Source-Free Domain Adaptation with Temporal Imputation for Time Series Data
 
 <p align="center">
-<img src="misc/temporal_adapt.pdf" width="900" class="center">
+<img src="misc/temporal_adapt.PNG" width="900" class="center">
 </p>
 
 ## Requirmenets:
