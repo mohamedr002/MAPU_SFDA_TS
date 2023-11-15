@@ -88,11 +88,11 @@ if __name__ == "__main__":
     parser.add_argument('-run_description', default=None, type=str, help='Description of run, if none, DA method name will be used')
 
     # ========= Select the DA methods ============
-    parser.add_argument('--da_method', default='MAPU', type=str, help='SHOT, EVD, MAPU,')
+    parser.add_argument('--da_method', default='AaD', type=str, help='SHOT, AaD, NRC, MAPU,')
 
     # ========= Select the DATASET ==============
     parser.add_argument('--data_path', default=r'D:\TS_Datsets\ADATIME_data', type=str, help='Path containing datase2t')
-    parser.add_argument('--dataset', default='FD', type=str, help='Dataset of choice: (WISDM - EEG - HAR - HHAR_SA)')
+    parser.add_argument('--dataset', default='HAR', type=str, help='Dataset of choice: (WISDM - EEG - HAR - HHAR_SA)')
 
     # ========= Select the BACKBONE ==============
     parser.add_argument('--backbone', default='CNN', type=str, help='Backbone of choice: (CNN - RESNET18 - TCN)')
