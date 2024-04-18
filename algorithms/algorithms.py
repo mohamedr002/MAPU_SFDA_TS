@@ -189,6 +189,9 @@ class SHOT(Algorithm):
             dd = cdist(all_features, initc, 'cosine')
             pred_label = dd.argmin(axis=1)
             pred_label = torch.from_numpy(pred_label)
+
+        self.feature_extractor.train()
+        self.classifier.train()
         return pred_label
 
 class AaD(Algorithm):
