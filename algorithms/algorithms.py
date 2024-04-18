@@ -253,30 +253,34 @@ class AaD(Algorithm):
             logger.debug(f'-------------------------------------')
 
     def update(self, trg_dataloader, avg_meter, logger):
-        # defining best and last model
-        best_src_risk = float('inf')
-        best_model = self.network.state_dict()
-        last_model = self.network.state_dict()
         for epoch in range(1, self.hparams["num_epochs"] + 1):
             # inilize alpha value
 
+            # defining best and last model
+            best_src_risk = float('inf')
+            best_model = self.network.state_dict()
+            last_model = self.network.state_dict()
+
+            fea_bank, score_bank = self.build_feat_score_bank(trg_dataloader)
+
             for step, (trg_x, _, trg_idx) in enumerate(trg_dataloader):
                 trg_x = trg_x.float().to(self.device)
+                num_samples = len(trg_dataloader.dataset)
+
                 # Extract features
                 features, _ = self.feature_extractor(trg_x)
                 predictions = self.classifier(features)
-                num_samples = len(trg_dataloader.dataset)
-                fea_bank = torch.randn(num_samples, self.configs.final_out_channels * self.configs.features_len)
-                score_bank = torch.randn(num_samples, self.configs.num_classes).cuda()
+
+                # output softmax probs
                 softmax_out = nn.Softmax(dim=1)(predictions)
 
                 alpha = (1 + 10 * step / self.hparams["num_epochs"] * len(trg_dataloader)) ** (-self.hparams['beta']) * \
                         self.hparams['alpha']
                 with torch.no_grad():
                     output_f_norm = F.normalize(features)
-                    output_f_ = output_f_norm.cpu().detach().clone()
+                    output_f_ = output_f_norm.detach().clone()
 
-                    fea_bank[trg_idx] = output_f_.detach().clone().cpu()
+                    fea_bank[trg_idx] = output_f_.detach().clone()
                     score_bank[trg_idx] = softmax_out.detach().clone()
 
                     distance = output_f_ @ fea_bank.T
@@ -311,17 +315,33 @@ class AaD(Algorithm):
                 # meter updates
                 avg_meter['Total_loss'].update(loss.item(), 32)
 
-            if (epoch + 1) % 10 == 0 and avg_meter['Src_cls_loss'].avg < best_src_risk:
-                best_src_risk = avg_meter['Src_cls_loss'].avg
-                best_model = deepcopy(self.network.state_dict())
-
             logger.debug(f'[Epoch : {epoch}/{self.hparams["num_epochs"]}]')
             for key, val in avg_meter.items():
                 logger.debug(f'{key}\t: {val.avg:2.4f}')
             logger.debug(f'-------------------------------------')
-
         return last_model, best_model
 
+    def build_feat_score_bank(self, data_loader):
+        fea_bank = torch.empty(0).cuda()
+        score_bank = torch.empty(0).cuda()
+
+        self.feature_extractor.eval()
+        self.classifier.eval()
+
+        # Process data batch by batch
+        for data in data_loader:
+            batch_data = data[0].cuda()  # Assuming the first element in your batch is the data. Adjust as needed.
+
+            batch_feat,_ = self.feature_extractor(batch_data)
+            norm_feats = F.normalize(batch_feat)
+            batch_pred = self.classifier(batch_feat)
+            batch_probs = nn.Softmax(dim=-1)(batch_pred)
+
+            # Update the banks
+            fea_bank = torch.cat((fea_bank, norm_feats.detach()), 0)
+            score_bank = torch.cat((score_bank, batch_probs.detach()), 0)
+
+        return fea_bank, score_bank
 
 class NRC(Algorithm):
     """
